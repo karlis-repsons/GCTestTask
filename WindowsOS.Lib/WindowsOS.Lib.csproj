@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +41,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="computerPowerSwitch\TestWindowsOsRunStateController.cs" />
+    <Compile Include="computerPowerSwitch\WindowsOsRunStateController.cs" />
+    <Compile Include="computerPowerSwitch\IWindowsOsRunStateController.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\TestDriversProxy.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\DriversProxy.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\manage\DriverManager.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\manage\enablement\TestDriverEnablementController.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\manage\enablement\DriverEnablementController.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\manage\TestDriverManager.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\driverListers\AllDriversLister.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\driverListers\TestAllDriversLister.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\driverProps\TestAnyDriverPropsGetter.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\driverProps\AnyDriverPropsGetter.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\DriverQueryable.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\driverStatus\AnyDriverStatusGetter.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\driverStatus\TestAnyDriverStatusGetter.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\TestDriverQueryable.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\_impl_\DriverQueriesBase.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\query\_impl_\TestDriverQueriesBase.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\_share_\testDriversSource\TestDriverPropNames.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\_share_\testDriversSource\ITestDriversSource.cs" />
+    <Compile Include="Drivers\Installed\DriversProxies\Default\_share_\testDriversSource\TestDriversSource.cs" />
+    <Compile Include="Drivers\Installed\ITestDriversProxy.cs" />
+    <Compile Include="Drivers\Installed\IDriversProxy.cs" />
+    <Compile Include="Drivers\Installed\_ifce_\manage\IDriverManagement.cs" />
+    <Compile Include="Drivers\Installed\_ifce_\manage\_ifce_\IDriverEnablementController.cs" />
+    <Compile Include="Drivers\Installed\_ifce_\query\IDriverQueries.cs" />
+    <Compile Include="Drivers\Installed\_ifce_\query\_ifce_\IDriverStatus.cs" />
+    <Compile Include="Drivers\Installed\_ifce_\query\_ifce_\IDriverProps.cs" />
+    <Compile Include="Drivers\Installed\_ifce_\query\_ifce_\IDriversList.cs" />
+    <Compile Include="Drivers\Installed\_share_\dataTypes\DriverStatus.cs" />
+    <Compile Include="Drivers\Installed\_share_\dataTypes\DriverPropName.cs" />
+    <Compile Include="Drivers\Installed\_share_\exceptions\InvalidDriverPropName.cs" />
+    <Compile Include="Drivers\Installed\_share_\exceptions\TwoDriversWithSameModuleName.cs" />
+    <Compile Include="Drivers\Installed\_share_\exceptions\CannotDisableDriver.cs" />
+    <Compile Include="Drivers\Installed\_share_\pendingDriverChanges\ITestPendingDriverChangesRegister.cs" />
+    <Compile Include="Drivers\Installed\_share_\pendingDriverChanges\IPendingDriverChangesRegister.cs" />
+    <Compile Include="Drivers\Installed\_share_\pendingDriverChanges\IPendingDriverChanges.cs" />
+    <Compile Include="Drivers\Installed\_share_\pendingDriverChanges\_share_\TestDefaultPendingDriverChangesRegister.cs" />
+    <Compile Include="Drivers\Installed\_share_\pendingDriverChanges\_share_\DefaultPendingDriverChangesRegister.cs" />
+    <Compile Include="Drivers\_share_\dataTypes\DriverModuleName.cs" />
+    <Compile Include="Drivers\_share_\exceptions\InvalidDriverModuleName.cs" />
+    <Compile Include="Drivers\_share_\exceptions\DriverException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_share_\exceptions\WindowsOSLibException.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
