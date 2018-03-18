@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsOS.Lib", "WindowsOS.Lib\WindowsOS.Lib.csproj", "{DDC87567-F48F-4302-B06C-306D3B394528}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCTestTask.Lib", "GCTestTask.Lib\GCTestTask.Lib.csproj", "{89DFDF77-9137-4094-947A-0FC035E0BEAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DDC87567-F48F-4302-B06C-306D3B394528}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDC87567-F48F-4302-B06C-306D3B394528}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDC87567-F48F-4302-B06C-306D3B394528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89DFDF77-9137-4094-947A-0FC035E0BEAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89DFDF77-9137-4094-947A-0FC035E0BEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89DFDF77-9137-4094-947A-0FC035E0BEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89DFDF77-9137-4094-947A-0FC035E0BEAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
