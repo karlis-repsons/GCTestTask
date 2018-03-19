@@ -39,10 +39,12 @@ namespace GCTestTask.Lib
             this.switchInitiators.Add(switchInitiator);
 
             enablementSwitch.ActivationRequested
-                += (sender, ea) => this.ActivationRequested?.Invoke(sender, ea);
+                += (sender, ea) 
+                        => this.ActivationRequested?.Invoke(sender, ea);
 
             enablementSwitch.DeactivationRequested
-                += (sender, ea) => this.DeactivationRequested?.Invoke(sender, ea);
+                += (sender, ea) 
+                        => this.DeactivationRequested?.Invoke(sender, ea);
 
             this.ActivationRequested
                     += (sender, dModuleName)

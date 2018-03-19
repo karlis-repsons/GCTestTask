@@ -20,13 +20,6 @@ namespace GCTestTask.Lib
         }
 
         public void StartPeriodicUpdates(uint periodMs) {
-            //uint minAllowedUpdatesPeriod = 100; // TODO
-            //Contract.Requires(
-            //            periodMs >= minAllowedUpdatesPeriod,
-            //            string.Format(  "Given updates period {0} < {1}.",
-            //                            periodMs, minAllowedUpdatesPeriod    )
-            //);
-
             this.timer.Stop();
             this.timer.Interval = periodMs;
             this.timer.Start();
