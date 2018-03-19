@@ -6,6 +6,6 @@ namespace GCTestTask.Lib
     {
         void Fetch();
 
-        event Action FetchDone;
+        event EventHandler FetchDone;
     }
 }

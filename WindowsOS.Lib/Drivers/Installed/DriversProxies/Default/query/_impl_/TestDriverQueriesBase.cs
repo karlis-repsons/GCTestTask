@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
 {
@@ -16,11 +16,11 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
                                         DriverModuleName moduleName,
                                         DriverPropName propName
         ){
-            Contract.Requires(
-                   string.IsNullOrEmpty(moduleName) == false
-                && string.IsNullOrEmpty(propName) == false
-            );
-            Contract.Ensures(Contract.Result<string>() != null);
+            //Contract.Requires(
+            //       string.IsNullOrEmpty(moduleName) == false
+            //    && string.IsNullOrEmpty(propName) == false
+            //);
+            //Contract.Ensures(Contract.Result<string>() != null);
 
             List<Dictionary<DriverPropName, string>> allDriversPropDicts
                 = this.driversSource.GetPropDictionariesCopy();
@@ -28,7 +28,7 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
             foreach (Dictionary<DriverPropName, string>
                      driverPropDict in allDriversPropDicts
             )
-                if (driverPropDict[DPNs.ModuleName] == (string)moduleName)
+                if (driverPropDict[DPNs.ModuleName] == moduleName.ToString())
                     return driverPropDict[propName];
 
             throw new InvalidOperationException(

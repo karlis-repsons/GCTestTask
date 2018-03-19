@@ -10,6 +10,6 @@ namespace GCTestTask.Lib
 
         void StopPeriodicUpdates();
 
-        event Action UpdateDone;
+        event EventHandler UpdateDone;
     }
 }

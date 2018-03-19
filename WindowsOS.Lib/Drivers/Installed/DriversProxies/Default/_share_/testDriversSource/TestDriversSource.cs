@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 using System.Threading;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
@@ -19,8 +19,8 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         public List<Dictionary<DriverPropName, string>>
                GetPropDictionariesCopy()
         {
-            Contract.Ensures(Contract.Result<
-                        List<Dictionary<DriverPropName, string>>   >() != null);
+            //Contract.Ensures(Contract.Result<
+            //            List<Dictionary<DriverPropName, string>>   >() != null);
             // TODO: consider Contract.ForAll to Ensure elements (might not work)
 
             propsLock.EnterReadLock();
@@ -51,10 +51,10 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         public Dictionary<DriverModuleName, DriverStatus> 
                GetStatusDictionaryCopy()
         {
-            Contract.Ensures(Contract.Result<
-                                Dictionary<DriverModuleName, DriverStatus>
-                        >() != null
-            );
+            //Contract.Ensures(Contract.Result<
+            //                    Dictionary<DriverModuleName, DriverStatus>
+            //            >() != null
+            //);
 
             statusesLock.EnterReadLock();
 
@@ -101,14 +101,14 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
                 foreach (Dictionary<DriverPropName, string>
                          driverPropDict in this.allDriversPropDicts
                 )
-                    if (driverPropDict[DPNs.ModuleName] == mn) {
+                    if (driverPropDict[DPNs.ModuleName] == mn.ToString()) {
                         if (driverPropDict.ContainsKey(pn) == false)
-                            throw new InvalidDriverPropName(pn);
+                            throw new InvalidDriverPropName(pn.ToString());
 
                         return driverPropDict[pn];
                     }
 
-                throw new InvalidDriverModuleName(mn);
+                throw new InvalidDriverModuleName(mn.ToString());
             }
             finally {
                 this.propsLock.ExitReadLock();
@@ -125,14 +125,14 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
                 foreach (Dictionary<DriverPropName, string>
                          driverPropDict in this.allDriversPropDicts
                 )
-                    if (driverPropDict[DPNs.ModuleName] == mn) {
+                    if (driverPropDict[DPNs.ModuleName] == mn.ToString()) {
                         if (driverPropDict.ContainsKey(pn) == false)
-                            throw new InvalidDriverPropName(pn);
+                            throw new InvalidDriverPropName(pn.ToString());
 
                         driverPropDict[pn] = value;
                     }
 
-                throw new InvalidDriverModuleName(mn);
+                throw new InvalidDriverModuleName(mn.ToString());
             }
             finally {
                 this.propsLock.ExitWriteLock();
@@ -143,7 +143,7 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
             this.statusesLock.EnterReadLock();
             try {
                 if (this.driversStatus.ContainsKey(n) == false)
-                    throw new InvalidDriverModuleName(n);
+                    throw new InvalidDriverModuleName(n.ToString());
 
                 return this.driversStatus[n];
             }
@@ -156,7 +156,7 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
             this.statusesLock.EnterWriteLock();
             try {
                 if (this.driversStatus.ContainsKey(n) == false)
-                    throw new InvalidDriverModuleName(n);
+                    throw new InvalidDriverModuleName(n.ToString());
 
                 this.driversStatus[n] = s;
             }
@@ -283,13 +283,13 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
             this.isDisposed = true;
         }
 
-        [ContractInvariantMethod]
+        /*[ContractInvariantMethod]
         private void ObjectInvariant() {
             Contract.Invariant(
                    allDriversPropDicts != null
                 && driversStatus != null
             );
-        }
+        }*/
 
         private readonly ReaderWriterLockSlim propsLock;
         private readonly ReaderWriterLockSlim statusesLock;

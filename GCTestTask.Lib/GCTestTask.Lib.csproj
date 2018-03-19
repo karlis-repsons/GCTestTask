@@ -1,11 +1,66 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EF6825BB-EDEF-4BA1-9D93-EED321527AD8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GCTestTask.Lib</RootNamespace>
+    <AssemblyName>GCTestTask.Lib</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WindowsOS.Lib\WindowsOS.Lib.csproj" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Compile Include="driversStatus\DriversStatusFollower.cs" />
+    <Compile Include="driversStatus\_impl_\default\DefaultDriversStatusFetcher.cs" />
+    <Compile Include="driversStatus\_impl_\default\DefaultDriversStatusPeriodicUpdater.cs" />
+    <Compile Include="driversStatus\_impl_\default\DefaultDriversStatusStorage.cs" />
+    <Compile Include="driversStatus\_impl_\_ifce_\IDriversStatusFetcher.cs" />
+    <Compile Include="driversStatus\_impl_\_ifce_\IDriversStatusPeriodicUpdater.cs" />
+    <Compile Include="driversStatus\_impl_\_ifce_\IDriversStatusStorage.cs" />
+    <Compile Include="enablementSwitcher\DriversScheduledEnablementSwitcher.cs" />
+    <Compile Include="enablementSwitcher\_impl_\default\DefaultOneDriverEnablementSwitch.cs" />
+    <Compile Include="enablementSwitcher\_impl_\default\DefaultScheduledEnablementSwitchInitiator.cs" />
+    <Compile Include="enablementSwitcher\_impl_\_ifce_\IOneDriverEnablementSwitch.cs" />
+    <Compile Include="enablementSwitcher\_impl_\_ifce_\IScheduledEnablementSwitchInitiator.cs" />
+    <Compile Include="enablementSwitcher\_share_\dataTypes\DriverEnablementRequest.cs" />
+    <Compile Include="enablementSwitcher\_share_\dataTypes\DriverEnablementSchedule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WindowsOS.Lib\WindowsOS.Lib.csproj">
+      <Project>{ddc87567-f48f-4302-b06c-306d3b394528}</Project>
+      <Name>WindowsOS.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

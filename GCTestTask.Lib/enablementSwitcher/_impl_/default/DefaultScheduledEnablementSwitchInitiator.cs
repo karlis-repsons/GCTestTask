@@ -4,7 +4,7 @@ using System.Timers;
 
 namespace GCTestTask.Lib
 {
-    public class DefaultScheduledEnablementSwitchInitiator :
+    public sealed class DefaultScheduledEnablementSwitchInitiator :
                                             IScheduledEnablementSwitchInitiator,
                                             IDisposable
     {

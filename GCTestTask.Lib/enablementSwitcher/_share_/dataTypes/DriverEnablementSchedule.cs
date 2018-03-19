@@ -1,28 +1,25 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace GCTestTask.Lib
 {
+    [Serializable]
     public class DriverEnablementSchedule :
                     Dictionary<DateTime, DriverEnablementRequest>
     {
         // forward construction to Dictionary base class:
         // ----------------------------------------------
         public DriverEnablementSchedule() { }
-        
-        public DriverEnablementSchedule(
-                    IDictionary<DateTime, DriverEnablementRequest> dictionary
-        ) : base(dictionary) { }
 
         public DriverEnablementSchedule(int capacity) : base(capacity) { }
 
-        public DriverEnablementSchedule(
-                    IEnumerable<KeyValuePair<DateTime, DriverEnablementRequest>>
-                    collection
-        ) : base(collection) { }
-
         public DriverEnablementSchedule(IEqualityComparer<DateTime> comparer)
-            : base(comparer) { }
+                    : base(comparer) { }
+
+        public DriverEnablementSchedule(
+                    IDictionary<DateTime, DriverEnablementRequest> dictionary
+        ) : base(dictionary) { }
 
         public DriverEnablementSchedule(
                     int capacity,
@@ -34,11 +31,10 @@ namespace GCTestTask.Lib
                     IEqualityComparer<DateTime> comparer
         ) : base(dictionary, comparer) { }
 
-        public DriverEnablementSchedule(
-                    IEnumerable<KeyValuePair<DateTime, DriverEnablementRequest>>
-                    collection
-                  , IEqualityComparer<DateTime> comparer
-        ) : base (collection, comparer) { }
+        protected DriverEnablementSchedule(
+                    SerializationInfo info,
+                    StreamingContext context
+        ) : base (info, context) { }
         // ==============================================
     }
 }

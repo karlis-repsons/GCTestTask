@@ -34,7 +34,7 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
                 = this.driversSource.GetStatusDictionaryCopy();
 
             if (statusesCopy.ContainsKey(moduleName) == false)
-                throw new InvalidDriverModuleName(moduleName);
+                throw new InvalidDriverModuleName(moduleName.ToString());
 
             bool isActivated = selectValue(statusesCopy[moduleName]);
             return isActivated;

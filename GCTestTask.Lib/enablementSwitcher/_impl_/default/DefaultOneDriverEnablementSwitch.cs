@@ -24,7 +24,7 @@ namespace GCTestTask.Lib
                 return;
 
             this.enablementController.EnableDriver(this.moduleName);
-            this.ActivationRequested?.Invoke(this.moduleName);
+            this.ActivationRequested?.Invoke(this, this.moduleName);
         }
 
         public void RequestDeactivation() {
@@ -35,12 +35,12 @@ namespace GCTestTask.Lib
                 return;
 
             this.enablementController.DisableDriver(this.moduleName);
-            this.DeactivationRequested?.Invoke(this.moduleName);
+            this.DeactivationRequested?.Invoke(this, this.moduleName);
         }
 
-        public event Action<DriverModuleName> DeactivationRequested;
+        public event EventHandler<DriverModuleName> DeactivationRequested;
 
-        public event Action<DriverModuleName> ActivationRequested;
+        public event EventHandler<DriverModuleName> ActivationRequested;
 
 
         private readonly DriverModuleName moduleName;

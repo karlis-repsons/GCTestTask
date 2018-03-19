@@ -10,8 +10,8 @@ namespace GCTestTask.Lib
 
         void RequestDeactivation();
 
-        event Action<DriverModuleName> DeactivationRequested;
+        event EventHandler<DriverModuleName> DeactivationRequested;
 
-        event Action<DriverModuleName> ActivationRequested;
+        event EventHandler<DriverModuleName> ActivationRequested;
     }
 }

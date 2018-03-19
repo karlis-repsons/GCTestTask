@@ -7,7 +7,7 @@ using WindowsOS.Lib.Drivers.Installed;
 
 namespace GCTestTask.Lib
 {
-    public class DriversScheduledEnablementSwitcher : IDisposable
+    public sealed class DriversScheduledEnablementSwitcher : IDisposable
     {
         public DriversScheduledEnablementSwitcher(
                 IDriverStatus driverStatusGetter,
@@ -38,12 +38,19 @@ namespace GCTestTask.Lib
 
             this.switchInitiators.Add(switchInitiator);
 
-            enablementSwitch.ActivationRequested += this.ActivationRequested;
-            enablementSwitch.DeactivationRequested
-                     += this.DeactivationRequested;
+            enablementSwitch.ActivationRequested
+                += (sender, ea) => this.ActivationRequested?.Invoke(sender, ea);
 
-            this.ActivationRequested += this.ConsiderRestartingComputer;
-            this.DeactivationRequested += this.ConsiderRestartingComputer;
+            enablementSwitch.DeactivationRequested
+                += (sender, ea) => this.DeactivationRequested?.Invoke(sender, ea);
+
+            this.ActivationRequested
+                    += (sender, dModuleName)
+                        => this.ConsiderRestartingComputer(dModuleName);
+
+            this.DeactivationRequested 
+                    += (sender, dModuleName)
+                        => this.ConsiderRestartingComputer(dModuleName);
 
             switchInitiator.Start();
         }
@@ -64,9 +71,9 @@ namespace GCTestTask.Lib
 
         public bool ShouldRebootToDeactivateDriver { get; set; } = false;
 
-        public event Action<DriverModuleName> DeactivationRequested;
+        public event EventHandler<DriverModuleName> DeactivationRequested;
 
-        public event Action<DriverModuleName> ActivationRequested;
+        public event EventHandler<DriverModuleName> ActivationRequested;
 
         public void Dispose() {
             foreach (   DefaultScheduledEnablementSwitchInitiator 

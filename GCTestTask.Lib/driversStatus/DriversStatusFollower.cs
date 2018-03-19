@@ -6,7 +6,7 @@ using WindowsOS.Lib.Drivers.Installed;
 
 namespace GCTestTask.Lib
 {
-    public class DriversStatusFollower : IDisposable
+    public sealed class DriversStatusFollower : IDisposable
     {
         public DriversStatusFollower(IDriverQueries driverQueryable) {
             this.driverQueryable = driverQueryable;
@@ -17,13 +17,15 @@ namespace GCTestTask.Lib
             this.updater
                     = new DefaultDriversStatusPeriodicUpdater(this.fetcher);
 
-            this.updater.UpdateDone += this.UpdateDone;
+            this.updater.UpdateDone 
+                += (sender, ea) 
+                        => this.UpdateDone?.Invoke(sender, ea);
         }
 
         public void Follow(uint updatePeriodMs = 10_000)
             => this.updater.StartPeriodicUpdates(updatePeriodMs);
 
-        public event Action UpdateDone;
+        public event EventHandler UpdateDone;
 
         public IReadOnlyDictionary<DriverModuleName, DriverStatus>
                Statuses

@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 
 using WindowsOS.Lib.Drivers;
 using WindowsOS.Lib.Drivers.Installed;
@@ -18,7 +18,7 @@ namespace GCTestTask.Lib
                Statuses => this.statuses;
 
         public void Save(DriverModuleName moduleName, DriverStatus status) {
-            Contract.Requires(moduleName != null && status != null);
+            //Contract.Requires(moduleName != null && status != null);
 
             this.statuses[moduleName] = status;
         }

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 
 using WindowsOS.Lib.Drivers;
 using WindowsOS.Lib.Drivers.Installed;
@@ -13,7 +13,7 @@ namespace GCTestTask.Lib
                                             IDriverQueries driverQueryable,
                                             IDriversStatusStorage statusStorage
         ){
-            Contract.Requires(driverQueryable != null && statusStorage != null);
+            //Contract.Requires(driverQueryable != null && statusStorage != null);
 
             this.driverQueryable = driverQueryable;
             this.statusStorage = statusStorage;
@@ -34,10 +34,10 @@ namespace GCTestTask.Lib
                 this.statusStorage.Save(mn, status);
             }
 
-            this.FetchDone?.Invoke();
+            this.FetchDone?.Invoke(this, null);
         }
 
-        public event Action FetchDone;
+        public event EventHandler FetchDone;
 
 
         private readonly IDriverQueries driverQueryable;

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
 {
@@ -16,7 +16,7 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public void EnableDriver(DriverModuleName moduleName) {
-            Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
+            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
 
             if (this.driversSource.GetStatus(moduleName).IsActivated)
                 return;
@@ -48,13 +48,13 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public void DisableDriver(DriverModuleName moduleName) {
-            Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
+            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
 
             if (this.driversSource.GetStatus(moduleName).IsActivated == false)
                 return;
 
             if (this.driverPropsGetter.SupportsDisabling(moduleName) == false)
-                throw new CannotDisableDriver(moduleName);
+                throw new CannotDisableDriver(moduleName.ToString());
 
             // Assumption: if driver was loaded, it will never be unloaded
             //             by Windows kernel before computer restart.

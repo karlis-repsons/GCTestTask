@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
 {
@@ -12,8 +12,8 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public HashSet<DriverModuleName> GetModuleNames() {
-            Contract.Ensures(Contract.Result<
-                                HashSet<DriverModuleName>   >() != null);
+            //Contract.Ensures(Contract.Result<
+            //                    HashSet<DriverModuleName>   >() != null);
 
             List<Dictionary<DriverPropName, string>> allDriversPropDicts 
                 = this.driversSource.GetPropDictionariesCopy();
@@ -29,7 +29,7 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public bool HasDriver(DriverModuleName moduleName) {
-            Contract.Requires(moduleName != null);
+            //Contract.Requires(moduleName != null);
 
             List<Dictionary<DriverPropName, string>> allDriversPropDicts
                 = this.driversSource.GetPropDictionariesCopy();
@@ -37,7 +37,7 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
             foreach (Dictionary<DriverPropName, string>
                      driverPropDict in allDriversPropDicts
             )
-                if (driverPropDict[DPNs.ModuleName] == (string)moduleName)
+                if (driverPropDict[DPNs.ModuleName] == moduleName.ToString())
                     return true;
 
             return false;

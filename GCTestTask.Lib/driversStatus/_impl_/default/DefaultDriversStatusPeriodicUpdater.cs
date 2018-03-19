@@ -1,31 +1,31 @@
 using System;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 using System.Timers;
 
 namespace GCTestTask.Lib
 {
-    public class DefaultDriversStatusPeriodicUpdater :
+    public sealed class DefaultDriversStatusPeriodicUpdater :
                                         IDriversStatusPeriodicUpdater,
                                         IDisposable
     {
         public DefaultDriversStatusPeriodicUpdater(
                                 IDriversStatusFetcher fetcher
         ){
-            Contract.Requires(fetcher != null);
+            //Contract.Requires(fetcher != null);
 
             this.fetcher = fetcher;
-            this.timer = new Timer {    AutoReset = true,
+            this.timer = new Timer {    AutoReset = false,
                                         Enabled = false     };
             this.timer.Elapsed += this.OnTimerPeriodEnd;
         }
 
         public void StartPeriodicUpdates(uint periodMs) {
-            uint minAllowedUpdatesPeriod = 100; // TODO
-            Contract.Requires(
-                        periodMs >= minAllowedUpdatesPeriod,
-                        string.Format(  "Given updates period {0} < {1}.",
-                                        periodMs, minAllowedUpdatesPeriod    )
-            );
+            //uint minAllowedUpdatesPeriod = 100; // TODO
+            //Contract.Requires(
+            //            periodMs >= minAllowedUpdatesPeriod,
+            //            string.Format(  "Given updates period {0} < {1}.",
+            //                            periodMs, minAllowedUpdatesPeriod    )
+            //);
 
             this.timer.Stop();
             this.timer.Interval = periodMs;
@@ -34,14 +34,15 @@ namespace GCTestTask.Lib
 
         public void StopPeriodicUpdates() => this.timer.Stop();
 
-        public event Action UpdateDone;
+        public event EventHandler UpdateDone;
 
         public void Dispose() => this.timer.Dispose();
 
 
         private void OnTimerPeriodEnd(object sender, ElapsedEventArgs e) {
             this.fetcher.Fetch();
-            this.UpdateDone?.Invoke();
+            this.UpdateDone?.Invoke(this, null);
+            this.timer.Start();
         }
 
         private readonly IDriversStatusFetcher fetcher;

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Management;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
 {
     public class AllDriversLister : IDriversList
     {
         public HashSet<DriverModuleName> GetModuleNames() {
-            Contract.Ensures(Contract.Result<
-                                HashSet<DriverModuleName>   >() != null);
+            //Contract.Ensures(Contract.Result<
+            //                    HashSet<DriverModuleName>   >() != null);
 
             var moduleNames = new HashSet<DriverModuleName>();
 
@@ -22,7 +22,7 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public bool HasDriver(DriverModuleName moduleName) {
-            Contract.Requires(moduleName != null);
+            //Contract.Requires(moduleName != null);
 
             bool hasDriver = false;
 
