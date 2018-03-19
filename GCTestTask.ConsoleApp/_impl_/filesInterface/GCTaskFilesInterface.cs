@@ -76,18 +76,15 @@ namespace GCTestTask.ConsoleApp
         public static string GetNameOfModuleToDisable() {
             string scheduleLine = GetScheduleLine();
 
-            if (scheduleLine == null)
+            if (string.IsNullOrEmpty(scheduleLine))
                 return null;
 
-            string moduleName = "";
-            foreach (char c in scheduleLine)
-                if (c != '\t' && c != ' ')
-                    moduleName += c;
+            string moduleName = null;
+            Match match = Regex.Match(scheduleLine, @"^\s*(\w+)");
+            if (match.Success)
+                moduleName = match.Groups[1].ToString();
 
-            return (    string.IsNullOrEmpty(moduleName)
-                        || string.IsNullOrWhiteSpace(moduleName)
-                    ) ?
-                    null : moduleName;
+            return moduleName;
         }
 
         public static IEnumerable<DateTime> GetDisablementSchedule() {
@@ -104,16 +101,16 @@ namespace GCTestTask.ConsoleApp
             var schedule = new List<DateTime>();
             try {
                 foreach (Match match in matches) {
-                    CaptureCollection captures = match.Captures;
-                    ushort year = ushort.Parse(captures[0].ToString()),
-                           month = ushort.Parse(captures[1].ToString()),
-                           monthDay = ushort.Parse(captures[2].ToString()),
-                           hour = ushort.Parse(captures[3].ToString()),
-                           minute = ushort.Parse(captures[4].ToString()),
-                           second = ushort.Parse(captures[5].ToString());
+                    GroupCollection groups = match.Groups;
+                    ushort year = ushort.Parse(groups[1].ToString()),
+                           month = ushort.Parse(groups[2].ToString()),
+                           monthDay = ushort.Parse(groups[3].ToString()),
+                           hour = ushort.Parse(groups[4].ToString()),
+                           minute = ushort.Parse(groups[5].ToString()),
+                           second = ushort.Parse(groups[6].ToString());
 
                     var time = new DateTime(year, month, monthDay,
-                                                hour, minute, second);
+                                                hour, minute, second    );
                     schedule.Add(time);
                 }
             }

@@ -9,6 +9,5 @@
 * WindowsOS.Lib - reusable elements related with WindowsOS; along with the code, which makes OS calls, there is testing code, which simulates the same calls and is useful for integration tests.
 
 # Further work:
-* Finish scheduling setup code.
 * Improve performance: make few driver queries to WMI, cache and reuse the results. 
 * Add integration tests, which make use of TestDriversProxy and fix defects.

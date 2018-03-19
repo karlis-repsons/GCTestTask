@@ -40,7 +40,7 @@ namespace GCTestTask.ConsoleApp
             this.switcher.DeactivationRequested
                     += (sender, ea)
                         => Console.WriteLine(string.Format(
-                            "Deactivation requested for driver '{0}.'",
+                            "Deactivation requested for driver '{0}'.",
                             moduleName                                    ));
 
             var switcherSchedule = new DriverEnablementSchedule();
