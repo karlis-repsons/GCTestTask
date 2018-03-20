@@ -47,7 +47,6 @@
     <Compile Include="_impl_\filesInterface\GCTaskFilesInterface.cs" />
     <Compile Include="_impl_\infoPrinters\GCTaskConsoleInfoPrinter.cs" />
     <Compile Include="_impl_\Launches.cs" />
-    <Compile Include="_impl_\_share_\dataTypes\GCTaskDriverInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -4,12 +4,12 @@ using System.Timers;
 
 namespace GCTestTask.Lib
 {
-    public sealed class DefaultDriversStatusPeriodicUpdater :
-                                        IDriversStatusPeriodicUpdater,
+    public sealed class DefaultDriversInfoPeriodicUpdater :
+                                        IDriversInfoPeriodicUpdater,
                                         IDisposable
     {
-        public DefaultDriversStatusPeriodicUpdater(
-                                IDriversStatusFetcher fetcher
+        public DefaultDriversInfoPeriodicUpdater(
+                                IDriversInfoFetcher fetcher
         ){
             //Contract.Requires(fetcher != null);
 
@@ -38,7 +38,7 @@ namespace GCTestTask.Lib
             this.timer.Start();
         }
 
-        private readonly IDriversStatusFetcher fetcher;
+        private readonly IDriversInfoFetcher fetcher;
         private readonly Timer timer;
     }
 }

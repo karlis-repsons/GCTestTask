@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
@@ -8,6 +9,7 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
                                     ITestDriversSource driversSource,
                                     IPendingDriverChanges pendingChanges
         ){
+            this.pendingChanges = pendingChanges;
             this.driversLister = new TestAllDriversLister(driversSource);
             this.driverPropsGetter
                     = new TestAnyDriverPropsGetter(driversSource);
@@ -19,11 +21,13 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         public TestDriverQueryable(
                                 IDriversList driversLister,
                                 IDriverProps driverPropsGetter,
-                                IDriverStatus driverStatusGetter
-        ) {
+                                IDriverStatus driverStatusGetter,
+                                IPendingDriverChanges pendingChanges
+        ){
             this.driversLister = driversLister;
             this.driverPropsGetter = driverPropsGetter;
             this.driverStatusGetter = driverStatusGetter;
+            this.pendingChanges = pendingChanges;
         }
 
         public HashSet<DriverModuleName> GetModuleNames()
@@ -50,7 +54,13 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         public bool IsActivationPending(DriverModuleName n)
             => this.driverStatusGetter.IsActivationPending(n);
 
+        public List<DriverInfo> GetAllDriversInfo() {
+            // TODO
+            throw new NotImplementedException();
+        }
 
+
+        private readonly IPendingDriverChanges pendingChanges;
         private readonly IDriversList driversLister;
         private readonly IDriverProps driverPropsGetter;
         private readonly IDriverStatus driverStatusGetter;

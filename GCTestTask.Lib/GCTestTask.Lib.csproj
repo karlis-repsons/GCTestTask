@@ -40,13 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="driversStatus\DriversStatusFollower.cs" />
-    <Compile Include="driversStatus\_impl_\default\DefaultDriversStatusFetcher.cs" />
-    <Compile Include="driversStatus\_impl_\default\DefaultDriversStatusPeriodicUpdater.cs" />
-    <Compile Include="driversStatus\_impl_\default\DefaultDriversStatusStorage.cs" />
-    <Compile Include="driversStatus\_impl_\_ifce_\IDriversStatusFetcher.cs" />
-    <Compile Include="driversStatus\_impl_\_ifce_\IDriversStatusPeriodicUpdater.cs" />
-    <Compile Include="driversStatus\_impl_\_ifce_\IDriversStatusStorage.cs" />
+    <Compile Include="driversInfo\DriversInfoFollower.cs" />
+    <Compile Include="driversInfo\_impl_\default\DefaultDriversInfoFetcher.cs" />
+    <Compile Include="driversInfo\_impl_\default\DefaultDriversInfoPeriodicUpdater.cs" />
+    <Compile Include="driversInfo\_impl_\default\DefaultDriversInfoStorage.cs" />
+    <Compile Include="driversInfo\_impl_\_ifce_\IDriversInfoFetcher.cs" />
+    <Compile Include="driversInfo\_impl_\_ifce_\IDriversInfoPeriodicUpdater.cs" />
+    <Compile Include="driversInfo\_impl_\_ifce_\IDriversInfoStorage.cs" />
     <Compile Include="enablementSwitcher\DriversScheduledEnablementSwitcher.cs" />
     <Compile Include="enablementSwitcher\_impl_\default\DefaultOneDriverEnablementSwitch.cs" />
     <Compile Include="enablementSwitcher\_impl_\default\DefaultScheduledEnablementSwitchInitiator.cs" />

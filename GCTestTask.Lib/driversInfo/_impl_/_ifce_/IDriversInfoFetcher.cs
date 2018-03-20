@@ -2,7 +2,7 @@ using System;
 
 namespace GCTestTask.Lib
 {
-    public interface IDriversStatusFetcher
+    public interface IDriversInfoFetcher
     {
         void Fetch();
 

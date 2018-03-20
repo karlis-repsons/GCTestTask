@@ -71,52 +71,33 @@ namespace GCTestTask.ConsoleApp
         }
 
         private void LaunchFollower() {
-            this.follower = new DriversStatusFollower(this.proxy.Query);
+            this.follower = new DriversInfoFollower(this.proxy.Query);
             this.follower.UpdateDone
                 += (sender, ea) => this.OnUpdatedDriversInfo();
 
             this.follower.Follow();
         }
 
-        private IReadOnlyCollection<GCTaskDriverInfo> MakeDriversInfo() {
+        private IReadOnlyCollection<DriverInfo> MakeDriversInfo() {
             throw new NotImplementedException();
         }
 
         private void OnUpdatedDriversInfo() {
-            Console.WriteLine("Update: started...");
+            Console.WriteLine("Update started...");
 
-            IReadOnlyDictionary<DriverModuleName, DriverStatus>
-                driversStatuses = this.follower.Statuses;
-
-            var driversInfo = new List<GCTaskDriverInfo>();
-            foreach (DriverModuleName mn in driversStatuses.Keys) {
-                try {
-                    var info = new GCTaskDriverInfo {
-                        ModuleName = mn.ToString(),
-                        DisplayName = this.proxy.Query
-                                          .GetDisplayName(mn).ToString(),
-                        IsActivated = driversStatuses[mn].IsActivated,
-                        SupportsDisabling = this.proxy.Query
-                                                .SupportsDisabling(mn)
-                    };
-
-                    driversInfo.Add(info);
-                }
-                catch (DriverException e) {
-                    Console.WriteLine(
-                        "[error] exception while fetching data: " + e.Message);
-                }
-            }
+            var driversInfo = new List<DriverInfo>();
+            foreach (DriverInfo driverInfo in this.follower.Info.Values)
+                    driversInfo.Add(driverInfo);
             
             GCTaskFilesInterface.SaveStatuses(driversInfo);
 
-            Console.WriteLine("Update: done.");
+            Console.WriteLine("Update done.");
         }
 
 
         private DefaultPendingDriverChangesRegister pendingChanges;
         private DriversProxy proxy;
-        private DriversStatusFollower follower;
+        private DriversInfoFollower follower;
         private DriversScheduledEnablementSwitcher switcher;
     }
 }

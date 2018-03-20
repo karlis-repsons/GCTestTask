@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using WindowsOS.Lib.Drivers.Installed;
+
 namespace GCTestTask.ConsoleApp
 {
     public class GCTaskFilesInterface
@@ -13,9 +15,9 @@ namespace GCTestTask.ConsoleApp
         public static string ScheduleFileName => "GCTask_schedule.txt";
 
         public static void SaveStatuses(
-                                IReadOnlyCollection<GCTaskDriverInfo> statuses
+                                IReadOnlyCollection<DriverInfo> driversInfo
         ){
-            string[] statusFileLines = new string[statuses.Count + 2];
+            string[] statusFileLines = new string[driversInfo.Count + 2];
 
             ushort mnc = 20, // module name col. width in chars
                    dnc = 60, // display name col. width in chars
@@ -24,12 +26,14 @@ namespace GCTestTask.ConsoleApp
             uint maxModuleNameChars = 0,
                  maxDisplayNameChars = 0;
 
-            foreach (GCTaskDriverInfo driverInfo in statuses) {
-                if (driverInfo.ModuleName.Length > maxModuleNameChars)
-                    maxModuleNameChars = (uint)driverInfo.ModuleName.Length;
+            foreach (DriverInfo driverInfo in driversInfo) {
+                int mnLength = driverInfo.ModuleName.ToString().Length;
+                if (mnLength > maxModuleNameChars)
+                    maxModuleNameChars = (uint)mnLength;
 
-                if (driverInfo.DisplayName.Length > maxDisplayNameChars)
-                    maxDisplayNameChars = (uint)driverInfo.DisplayName.Length;
+                int dnLength = driverInfo.Props.DisplayName.ToString().Length;
+                if (dnLength > maxDisplayNameChars)
+                    maxDisplayNameChars = (uint)dnLength;
             }
 
             statusFileLines[0]
@@ -44,16 +48,18 @@ namespace GCTestTask.ConsoleApp
                 = new string('-', mnc + dnc + 2 * blc + 4 * gapWidthChars);
 
             uint lineIndex = 2;
-            foreach (GCTaskDriverInfo driverInfo in statuses) {
+            foreach (DriverInfo driverInfo in driversInfo) {
                 string lineString
-                    = GetColumnString(  driverInfo.ModuleName,
-                                        maxModuleNameChars, mnc   )
-                    + GetColumnString(  driverInfo.DisplayName,
-                                        maxDisplayNameChars, dnc   )
-                    + GetColumnString(  driverInfo.IsActivated.ToString(),
+                    = GetColumnString(  driverInfo.ModuleName.ToString(),
+                                        maxModuleNameChars, mnc             )
+                    + GetColumnString(  driverInfo.Props.DisplayName,
+                                        maxDisplayNameChars, dnc        )
+                    + GetColumnString(  driverInfo.Status
+                                                  .IsActivated.ToString(),
                                         blc, blc                             )
-                    + GetColumnString(  driverInfo.SupportsDisabling.ToString(),
-                                        blc, blc     
+                    + GetColumnString(  driverInfo.Props
+                                                  .SupportsDisabling.ToString(),
+                                        blc, blc
                     );
 
                 statusFileLines[lineIndex] = lineString;

@@ -71,6 +71,8 @@
     <Compile Include="Drivers\Installed\_ifce_\query\_ifce_\IDriverStatus.cs" />
     <Compile Include="Drivers\Installed\_ifce_\query\_ifce_\IDriverProps.cs" />
     <Compile Include="Drivers\Installed\_ifce_\query\_ifce_\IDriversList.cs" />
+    <Compile Include="Drivers\Installed\_share_\dataTypes\DriverInfo.cs" />
+    <Compile Include="Drivers\Installed\_share_\dataTypes\DriverProps.cs" />
     <Compile Include="Drivers\Installed\_share_\dataTypes\DriverStatus.cs" />
     <Compile Include="Drivers\Installed\_share_\dataTypes\DriverPropName.cs" />
     <Compile Include="Drivers\Installed\_share_\exceptions\InvalidDriverPropName.cs" />

@@ -6,16 +6,16 @@ using WindowsOS.Lib.Drivers.Installed;
 
 namespace GCTestTask.Lib
 {
-    public sealed class DriversStatusFollower : IDisposable
+    public sealed class DriversInfoFollower : IDisposable
     {
-        public DriversStatusFollower(IDriverQueries driverQueryable) {
+        public DriversInfoFollower(IDriverQueries driverQueryable) {
             this.driverQueryable = driverQueryable;
 
-            this.storage = new DefaultDriversStatusStorage();
-            this.fetcher = new DefaultDriversStatusFetcher(
+            this.storage = new DefaultDriversInfoStorage();
+            this.fetcher = new DefaultDriversInfoFetcher(
                                             driverQueryable, this.storage   );
             this.updater
-                    = new DefaultDriversStatusPeriodicUpdater(this.fetcher);
+                    = new DefaultDriversInfoPeriodicUpdater(this.fetcher);
 
             this.updater.UpdateDone 
                 += (sender, ea) 
@@ -27,16 +27,16 @@ namespace GCTestTask.Lib
 
         public event EventHandler UpdateDone;
 
-        public IReadOnlyDictionary<DriverModuleName, DriverStatus>
-               Statuses
-        { get { return this.storage.Statuses; } }
+        public IReadOnlyDictionary<DriverModuleName, DriverInfo>
+               Info
+        { get { return this.storage.Info; } }
 
         public void Dispose() => this.updater.Dispose();
 
 
         private readonly IDriverQueries driverQueryable;
-        private readonly IDriversStatusStorage storage;
-        private readonly IDriversStatusFetcher fetcher;
-        private readonly DefaultDriversStatusPeriodicUpdater updater;
+        private readonly IDriversInfoStorage storage;
+        private readonly IDriversInfoFetcher fetcher;
+        private readonly DefaultDriversInfoPeriodicUpdater updater;
     }
 }
