@@ -16,9 +16,10 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
                                     driversSource, pendingChangesRegister   );
 
             this.manager
-                    = new TestDriverManager(   driversSource,
-                                               new AnyDriverPropsGetter(), 
-                                               pendingChangesRegister        );
+                    = new TestDriverManager(
+                            driversSource,
+                            new TestAnyDriverPropsGetter(driversSource), 
+                            pendingChangesRegister                         );
         }
 
         public TestDriversProxy(

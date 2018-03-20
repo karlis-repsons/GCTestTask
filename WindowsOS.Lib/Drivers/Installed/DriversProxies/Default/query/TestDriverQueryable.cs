@@ -55,7 +55,6 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
             => this.driverStatusGetter.IsActivationPending(n);
 
         public List<DriverInfo> GetAllDriversInfo() {
-            // TODO
             throw new NotImplementedException();
         }
 
