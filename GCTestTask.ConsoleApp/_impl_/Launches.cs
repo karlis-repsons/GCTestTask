@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-using WindowsOS.Lib;
 using WindowsOS.Lib.Drivers;
 using WindowsOS.Lib.Drivers.Installed;
 using WindowsOS.Lib.Drivers.Installed.DriversProxies.Default;
@@ -12,15 +11,11 @@ namespace GCTestTask.ConsoleApp
     public class Launches
     {
         public Launches() {
-            this.SetupDependencyInjection();
-            this.LaunchEnablementSwitcher();
-            this.LaunchFollower();
-        }
-
-        private void SetupDependencyInjection () {
-            // TODO - use some DI tech
             this.pendingChanges = new DefaultPendingDriverChangesRegister();
             this.proxy = new DriversProxy(pendingChanges);
+
+            this.LaunchEnablementSwitcher();
+            this.LaunchFollower();
         }
 
         private void LaunchEnablementSwitcher() {
