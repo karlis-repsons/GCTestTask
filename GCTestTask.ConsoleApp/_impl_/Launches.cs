@@ -22,8 +22,10 @@ namespace GCTestTask.ConsoleApp
             DriverModuleName moduleName;
             {
                 string mnStr = GCTaskFilesInterface.GetNameOfModuleToDisable();
-                if (string.IsNullOrEmpty(mnStr))
+                if (string.IsNullOrEmpty(mnStr)) {
+                    Console.WriteLine("Could not get module name of driver to disable.");
                     return;
+                }
 
                 moduleName = new DriverModuleName(mnStr);
                 if (this.proxy.Query.HasDriver(moduleName) == false) {
