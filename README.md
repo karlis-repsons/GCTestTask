@@ -1,6 +1,9 @@
 # Usage:
 * Open solution in VisualStudio (created with version 2017).
 * Start GCTestTask.ConsoleApp and see further info in its output.
+  Content example for GCTask_schedule.txt file:
+      ACPI 2018-03-21_10:10:00, 2018-03-21_10:20:00
+* Note that repetitive disable calls will not be made.
 
 # Projects and their purposes:
 * GCTestTask.ConsoleApp - test task application.
