@@ -114,7 +114,7 @@ namespace GCTestTask.ConsoleApp
                     schedule.Add(time);
                 }
             }
-            catch (Exception e) {
+            catch (Exception) {
                 return null;
             }
 

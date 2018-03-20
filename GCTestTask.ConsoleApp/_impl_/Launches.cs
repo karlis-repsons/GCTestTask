@@ -24,17 +24,36 @@ namespace GCTestTask.ConsoleApp
         }
 
         private void LaunchEnablementSwitcher() {
+            DriverModuleName moduleName;
+            {
+                string mnStr = GCTaskFilesInterface.GetNameOfModuleToDisable();
+                if (string.IsNullOrEmpty(mnStr))
+                    return;
+
+                moduleName = new DriverModuleName(mnStr);
+                if (this.proxy.Query.HasDriver(moduleName) == false) {
+                    Console.WriteLine(string.Format(
+                            "Driver {0} was not found.", mnStr));
+                    return;
+                }
+
+                if (this.proxy.Query.SupportsDisabling(moduleName) == false) {
+                    Console.WriteLine(string.Format(
+                            "Driver {0} cannot be disabled.", mnStr   ));
+                    return;
+                }
+            }
+
             this.switcher = new DriversScheduledEnablementSwitcher(
                                     this.proxy.Query,
                                     this.proxy.Manage,
                                     this.pendingChanges
             );
 
-            string moduleName = GCTaskFilesInterface.GetNameOfModuleToDisable();
             IEnumerable<DateTime> inputSchedule 
                 = GCTaskFilesInterface.GetDisablementSchedule();
 
-            if (inputSchedule == null || string.IsNullOrEmpty(moduleName))
+            if (inputSchedule == null)
                 return;
 
             this.switcher.DeactivationRequested
