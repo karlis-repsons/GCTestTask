@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-//using System.Diagnostics.Contracts;
 
-using WindowsOS.Lib.Drivers;
 using WindowsOS.Lib.Drivers.Installed;
 
 namespace GCTestTask.Lib
@@ -13,10 +10,10 @@ namespace GCTestTask.Lib
                                             IDriverQueries driverQueryable,
                                             IDriversInfoStorage infoStorage
         ){
-            //Contract.Requires(driverQueryable != null && statusStorage != null);
-
-            this.driverQueryable = driverQueryable;
-            this.infoStorage = infoStorage;
+            this.driverQueryable = driverQueryable
+                                 ?? throw new ArgumentNullException();
+            this.infoStorage = infoStorage
+                                 ?? throw new ArgumentNullException();
         }
 
         public void Fetch() {

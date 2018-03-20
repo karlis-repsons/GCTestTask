@@ -1,4 +1,3 @@
-//using System.Diagnostics.Contracts;
 using System.Management;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
@@ -9,11 +8,10 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
                                         DriverModuleName moduleName,
                                         string propName
         ) {
-            //Contract.Requires(
-            //       string.IsNullOrEmpty(moduleName) == false
-            //    && string.IsNullOrEmpty(propName) == false
-            //);
-            //Contract.Ensures(Contract.Result<string>() != null);
+            if (moduleName == null)
+                throw new InvalidDriverModuleName("null");
+            if (string.IsNullOrEmpty(propName))
+                throw new InvalidDriverPropName("null or empty");
 
             string propString = string.Empty;
 

@@ -1,6 +1,4 @@
-﻿//using System.Diagnostics.Contracts;
-
-using System;
+﻿using System;
 
 namespace WindowsOS.Lib.Drivers.Installed
 {
@@ -14,10 +12,6 @@ namespace WindowsOS.Lib.Drivers.Installed
                             IEquatable<DriverPropName>
     {
         public DriverPropName(string name) {
-            //Contract.Requires<InvalidDriverPropName>(
-            //            string.IsNullOrEmpty(name) == false,
-            //            "Null or empty not ok."
-            //);
             if (string.IsNullOrEmpty(name))
                 throw new InvalidDriverPropName("Null or empty not ok.");
 

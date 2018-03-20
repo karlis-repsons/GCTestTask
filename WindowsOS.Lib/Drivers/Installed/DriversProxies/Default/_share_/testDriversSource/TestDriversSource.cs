@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-//using System.Diagnostics.Contracts;
 using System.Threading;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
@@ -19,10 +18,6 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         public List<Dictionary<DriverPropName, string>>
                GetPropDictionariesCopy()
         {
-            //Contract.Ensures(Contract.Result<
-            //            List<Dictionary<DriverPropName, string>>   >() != null);
-            // TODO: consider Contract.ForAll to Ensure elements (might not work)
-
             propsLock.EnterReadLock();
 
             try {
@@ -51,11 +46,6 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         public Dictionary<DriverModuleName, DriverStatus> 
                GetStatusDictionaryCopy()
         {
-            //Contract.Ensures(Contract.Result<
-            //                    Dictionary<DriverModuleName, DriverStatus>
-            //            >() != null
-            //);
-
             statusesLock.EnterReadLock();
 
             try {
@@ -282,14 +272,6 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
             this.driversStatus = null;
             this.isDisposed = true;
         }
-
-        /*[ContractInvariantMethod]
-        private void ObjectInvariant() {
-            Contract.Invariant(
-                   allDriversPropDicts != null
-                && driversStatus != null
-            );
-        }*/
 
         private readonly ReaderWriterLockSlim propsLock;
         private readonly ReaderWriterLockSlim statusesLock;

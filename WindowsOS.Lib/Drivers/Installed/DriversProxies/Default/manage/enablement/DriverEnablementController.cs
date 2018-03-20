@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-//using System.Diagnostics.Contracts;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
 {
@@ -15,8 +14,6 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public void EnableDriver(DriverModuleName moduleName) {
-            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
-
             if (this.pendingChanges != null)
                 this.EnableDriverPatched(moduleName);
             else
@@ -24,8 +21,6 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public void DisableDriver(DriverModuleName moduleName) {
-            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
-
             if (this.pendingChanges != null)
                 this.DisableDriverPatched(moduleName);
             else
@@ -34,14 +29,13 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
 
 
         private void EnableDriverPure(DriverModuleName moduleName) {
-            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
-
             // TODO: implement
             throw new NotImplementedException();
         }
 
         private void EnableDriverPatched(DriverModuleName moduleName) {
-            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
+            if (moduleName == null)
+                throw new InvalidDriverModuleName("null");
 
             // TODO: either get the real driver status and use it here,
             //       or get rid of this method and make related refactoring.
@@ -62,14 +56,13 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         private void DisableDriverPure(DriverModuleName moduleName) {
-            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
-
             // TODO: implement
             throw new NotImplementedException();
         }
 
         private void DisableDriverPatched(DriverModuleName moduleName) {
-            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
+            if (moduleName == null)
+                throw new InvalidDriverModuleName("null");
 
             if (this.driverPropsGetter.SupportsDisabling(moduleName) == false)
                 throw new CannotDisableDriver(moduleName.ToString());

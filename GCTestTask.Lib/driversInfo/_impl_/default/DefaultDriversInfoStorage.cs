@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-//using System.Diagnostics.Contracts;
 
 using WindowsOS.Lib.Drivers;
 using WindowsOS.Lib.Drivers.Installed;
@@ -18,7 +18,8 @@ namespace GCTestTask.Lib
                Info => this.info;
 
         public void Save(List<DriverInfo> driversInfoList) {
-            //Contract.Requires(moduleName != null && status != null);
+            if (driversInfoList == null)
+                throw new ArgumentNullException();
 
             foreach (DriverInfo driverInfo in driversInfoList) {
                 DriverModuleName moduleName = driverInfo.ModuleName;

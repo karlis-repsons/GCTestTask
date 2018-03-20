@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Diagnostics.Contracts;
 using System.Threading;
 
 namespace WindowsOS.Lib.Drivers.Installed
@@ -80,14 +79,7 @@ namespace WindowsOS.Lib.Drivers.Installed
                 rwLock.ExitReadLock();
             }
         }
-
-        /*[ContractInvariantMethod]
-        private void ObjectInvariant() {
-            Contract.Invariant(
-                   deactivation != null && activation != null
-            );
-        }*/
-
+        
         private bool isDisposed = false;
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-//using System.Diagnostics.Contracts;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
 {
@@ -16,7 +15,8 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public void EnableDriver(DriverModuleName moduleName) {
-            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
+            if (moduleName == null)
+                throw new InvalidDriverModuleName("null");
 
             if (this.driversSource.GetStatus(moduleName).IsActivated)
                 return;
@@ -48,7 +48,8 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public void DisableDriver(DriverModuleName moduleName) {
-            //Contract.Requires(string.IsNullOrEmpty(moduleName) == false);
+            if (moduleName == null)
+                throw new InvalidDriverModuleName("null");
 
             if (this.driversSource.GetStatus(moduleName).IsActivated == false)
                 return;

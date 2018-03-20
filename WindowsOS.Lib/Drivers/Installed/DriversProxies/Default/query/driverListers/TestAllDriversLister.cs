@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-//using System.Diagnostics.Contracts;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
 {
@@ -12,9 +11,6 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public HashSet<DriverModuleName> GetModuleNames() {
-            //Contract.Ensures(Contract.Result<
-            //                    HashSet<DriverModuleName>   >() != null);
-
             List<Dictionary<DriverPropName, string>> allDriversPropDicts 
                 = this.driversSource.GetPropDictionariesCopy();
 
@@ -29,7 +25,8 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
         }
 
         public bool HasDriver(DriverModuleName moduleName) {
-            //Contract.Requires(moduleName != null);
+            if (moduleName == null)
+                throw new InvalidDriverModuleName("null");
 
             List<Dictionary<DriverPropName, string>> allDriversPropDicts
                 = this.driversSource.GetPropDictionariesCopy();

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-//using System.Diagnostics.Contracts;
 
 namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
 {
@@ -16,11 +15,10 @@ namespace WindowsOS.Lib.Drivers.Installed.DriversProxies.Default
                                         DriverModuleName moduleName,
                                         DriverPropName propName
         ){
-            //Contract.Requires(
-            //       string.IsNullOrEmpty(moduleName) == false
-            //    && string.IsNullOrEmpty(propName) == false
-            //);
-            //Contract.Ensures(Contract.Result<string>() != null);
+            if (moduleName == null)
+                throw new InvalidDriverModuleName("null");
+            if (propName == null)
+                throw new InvalidDriverPropName("null");
 
             List<Dictionary<DriverPropName, string>> allDriversPropDicts
                 = this.driversSource.GetPropDictionariesCopy();

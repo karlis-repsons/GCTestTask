@@ -1,5 +1,4 @@
 using System;
-//using System.Diagnostics.Contracts;
 using System.Timers;
 
 namespace GCTestTask.Lib
@@ -11,9 +10,7 @@ namespace GCTestTask.Lib
         public DefaultDriversInfoPeriodicUpdater(
                                 IDriversInfoFetcher fetcher
         ){
-            //Contract.Requires(fetcher != null);
-
-            this.fetcher = fetcher;
+            this.fetcher = fetcher ?? throw new ArgumentNullException();
             this.timer = new Timer {    AutoReset = false,
                                         Enabled = false     };
             this.timer.Elapsed += this.OnTimerPeriodEnd;
